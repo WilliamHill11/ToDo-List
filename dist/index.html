@@ -11,18 +11,47 @@
     <header>
       <div class="title">Lets get Shit done</div>
     </header>
-    <main class="grid">
+    <main>
       <nav>
         <ul>
-          <li>Inbox</li>
-          <li>Today</li>
-          <li>Upcoming</li>
+          <li class="inbox">Inbox</li>
+          <li class="today">Today</li>
+          <li class="upcoming">Upcoming</li>
         </ul>
         <h2>Projects</h2>
         <ul></ul>
       </nav>
       <div class="content">
         <h2>The cool project</h2>
+        <button class="addTask">+ Add Task</button>
+
+        <form action="" id="formID">
+          <div class="form">
+            <div class="formDetails">
+              <input type="text" id="title" name="title" placeholder="Task" />
+              <label for="title"></label>
+
+              <input type="date" id="dueDate" name="duedate" />
+              <label for="duedate"></label>
+
+              <select name="inbox">
+                <option value="inbox">Inbox</option>
+                <option value="test">test</option>
+              </select>
+
+              <div class="bottom">
+                <select name="priority">
+                  <option value="none">Priority Level</option>
+                  <option value="Low">Low</option>
+                  <option value="High">High</option>
+                </select>
+
+                <input type="submit" value="Add" id="formSubmit" />
+                <input type="submit" value="Cancel" id="cancelForm" />
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </main>
     <script src="main.js"></script>
