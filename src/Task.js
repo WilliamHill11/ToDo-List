@@ -1,14 +1,19 @@
-class CreateTask {
-  constructor(task, dueDate, inbox, priority) {
-    this.task = task;
+class Inbox {
+  constructor(title, dueDate, inbox, priority) {
+    this.title = title;
     this.dueDate = dueDate;
     this.inbox = inbox;
     this.priority = priority;
   }
 }
 
-const list = new CreateTask('yo', 'july', 'cool', 'now!!');
+let toDoList = [];
 
-console.log(list);
+export function createInbox() {
+  toDoList.push(
+    new Inbox(title.value, dueDate.value, inbox.value, priority.value)
+  );
+  console.log(toDoList);
+}
 
-export default CreateTask;
+export default Inbox;
