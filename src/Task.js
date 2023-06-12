@@ -7,7 +7,7 @@ class Inbox {
   }
 }
 
-let toDoList = [];
+export let toDoList = [];
 
 export function createInbox() {
   toDoList.push(

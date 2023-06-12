@@ -1,35 +1,77 @@
-import Inbox, { createInbox } from './Task';
+import Inbox, { createInbox, toDoList } from './Task';
+import Project from './Project';
 import { compareAsc, format } from 'date-fns';
 
 let log = console.log;
 
-const content = document.querySelector('.content');
+export const content = document.querySelector('.content');
 const addTask = document.querySelector('.addTask');
 const form = document.querySelector('#formID');
+const formClass = document.querySelector('.form');
 const formSubmit = document.querySelector('#formSubmit');
 const cancelFrom = document.querySelector('#cancelForm');
 const inbox = document.querySelector('.inbox');
 const todayEvents = document.querySelector('.today');
 const upcomingEvents = document.querySelector('.upcoming');
+const project = document.querySelector('.createProject');
+const toDoListWrapper = document.querySelector('.toDoListWrapper');
+// s
 
 inbox.addEventListener('click', inboxFolder);
 todayEvents.addEventListener('click', todaysFolder);
 upcomingEvents.addEventListener('click', upcomingFolder);
+project.addEventListener('click', createProject);
+
+log(toDoList);
 
 function inboxFolder() {
   content.textContent = '';
-  content.append(addTask, form);
+  content.append(addTask, form, toDoListWrapper);
 }
 
-function createToDoList() {
-  const toDoList = document.createElement('div');
-  toDoList.classList.add('toDoListWrapper');
-  content.append(toDoList);
+function render() {
+  toDoListWrapper.textContent = '';
+  for (let i = 0; i < toDoList.length; i++) {
+    createToDoList(toDoList[i]);
+  }
+}
 
+function createToDoList(task) {
+  const toDoList = document.querySelector('.toDoListWrapper');
   const newItem = document.createElement('div');
   newItem.classList.add('toDoList');
-  newItem.textContent = 'Good Morning';
   toDoList.appendChild(newItem);
+
+  const taskName = document.createElement('p');
+  taskName.classList.add('taskFinish');
+  taskName.textContent = task.title;
+
+  const date = document.createElement('p');
+  if (task.dueDate !== '') {
+    date.textContent = task.dueDate;
+  } else {
+    date.textContent = 'No Due Date';
+  }
+
+  const project = document.createElement('p');
+  project.innerHTML = `Project: <b>${task.inbox}<b>`;
+
+  const priority = document.createElement('p');
+  if (task.priority === 'High') {
+    priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+    newItem.style.backgroundColor = 'rgb(240, 67, 67)';
+  } else if (task.priority === 'Low') {
+    priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+    newItem.style.backgroundColor = 'orange';
+  } else {
+    priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+  }
+
+  // taskName.classList.add('toDoList');
+  // date.classList.add('toDoList');
+  // project.classList.add('toDoList');
+  // priority.classList.add('toDoList');
+  newItem.append(taskName, date, project, priority);
 }
 
 function todaysFolder() {
@@ -40,6 +82,15 @@ function upcomingFolder() {
   content.textContent = '';
 }
 
+let newProject = [];
+const projectForm = document.querySelector('#projectForm');
+
+function createProject() {
+  log('hi');
+  newProject.push(new Project(projectName.value));
+  projectForm.style.display = '';
+}
+
 addTask.addEventListener('click', (e) => {
   form.style.display = '';
 });
@@ -47,7 +98,7 @@ addTask.addEventListener('click', (e) => {
 formSubmit.addEventListener('click', (e) => {
   e.preventDefault();
   createInbox();
-  createToDoList();
+  render();
   form.reset();
   form.style.display = 'none';
 });
