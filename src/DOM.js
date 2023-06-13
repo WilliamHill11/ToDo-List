@@ -17,6 +17,7 @@ const createNewProject = document.querySelector('.createProject');
 const toDoListWrapper = document.querySelector('.toDoListWrapper');
 const addProject = document.querySelector('#addProject');
 const cancelProject = document.querySelector('#cancelProject');
+const pageName = document.querySelector('.pageName');
 
 inbox.addEventListener('click', inboxFolder);
 todayEvents.addEventListener('click', todaysFolder);
@@ -26,7 +27,8 @@ log(toDoList);
 
 function inboxFolder() {
   content.textContent = '';
-  content.append(addTask, form, toDoListWrapper);
+  pageName.textContent = 'inbox';
+  content.append(pageName, addTask, form, toDoListWrapper);
 }
 
 function render() {
@@ -72,10 +74,14 @@ function createToDoList(task) {
 
 function todaysFolder() {
   content.textContent = '';
+  pageName.textContent = 'Today';
+  content.append(pageName);
 }
 
 function upcomingFolder() {
   content.textContent = '';
+  pageName.textContent = 'Upcoming';
+  content.append(pageName);
 }
 
 let newProject = [];
@@ -89,6 +95,22 @@ let newProject = [];
 //   log('hi dear!');
 // }
 
+document.body.addEventListener('click', (e) => {
+  const target = e.target.closest('.projects');
+  log(pageName);
+  if (target) {
+    // content.textContent = '';
+    log(target.textContent);
+    if (pageName.textContent !== '') {
+      pageName.textContent = target.textContent;
+    } else {
+      pageName.textContent = '';
+    }
+  } else {
+    log('nope');
+  }
+});
+
 function createProject() {
   log(newProject);
   newProject.push(new Project(projectName.value));
@@ -100,6 +122,7 @@ function createProject() {
   projectList.textContent = projectName.value;
 
   const projectCategory = document.querySelector('#inbox');
+  if (projectCategory === null) return;
   projectCategory.add(new Option(projectName.value, projectName.value));
   log(projectCategory);
 
