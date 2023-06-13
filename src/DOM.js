@@ -7,20 +7,20 @@ let log = console.log;
 export const content = document.querySelector('.content');
 const addTask = document.querySelector('.addTask');
 const form = document.querySelector('#formID');
-const formClass = document.querySelector('.form');
 const formSubmit = document.querySelector('#formSubmit');
 const cancelFrom = document.querySelector('#cancelForm');
 const inbox = document.querySelector('.inbox');
 const todayEvents = document.querySelector('.today');
 const upcomingEvents = document.querySelector('.upcoming');
-const project = document.querySelector('.createProject');
+const projectForm = document.querySelector('#projectForm');
+const createNewProject = document.querySelector('.createProject');
 const toDoListWrapper = document.querySelector('.toDoListWrapper');
-// s
+const addProject = document.querySelector('#addProject');
+const cancelProject = document.querySelector('#cancelProject');
 
 inbox.addEventListener('click', inboxFolder);
 todayEvents.addEventListener('click', todaysFolder);
 upcomingEvents.addEventListener('click', upcomingFolder);
-project.addEventListener('click', createProject);
 
 log(toDoList);
 
@@ -67,10 +67,6 @@ function createToDoList(task) {
     priority.innerHTML = `Priority: <b>${task.priority}<b>`;
   }
 
-  // taskName.classList.add('toDoList');
-  // date.classList.add('toDoList');
-  // project.classList.add('toDoList');
-  // priority.classList.add('toDoList');
   newItem.append(taskName, date, project, priority);
 }
 
@@ -83,13 +79,52 @@ function upcomingFolder() {
 }
 
 let newProject = [];
-const projectForm = document.querySelector('#projectForm');
+
+//Trying to create a event when clicking on project list
+// const getProjectList = document.querySelector('li.projects');
+
+// getProjectList.addEventListener('click', renderProject);
+
+// function renderProject() {
+//   log('hi dear!');
+// }
 
 function createProject() {
-  log('hi');
+  log(newProject);
   newProject.push(new Project(projectName.value));
+
+  const projectList = document.createElement('li');
+  const navBar = document.querySelector('nav');
+  navBar.append(projectList);
+  projectList.classList.add('projects');
+  projectList.textContent = projectName.value;
+
+  const projectCategory = document.querySelector('#inbox');
+  projectCategory.add(new Option(projectName.value, projectName.value));
+  log(projectCategory);
+
   projectForm.style.display = '';
 }
+
+//Trying to toggle bg color when on that folder
+const navBar = document.querySelector('nav');
+log(navBar);
+
+addProject.addEventListener('click', (e) => {
+  e.preventDefault();
+  createProject();
+  projectForm.reset();
+  projectForm.style.display = 'none';
+});
+
+createNewProject.addEventListener('click', (e) => {
+  projectForm.style.display = '';
+});
+
+cancelProject.addEventListener('click', (e) => {
+  e.preventDefault();
+  projectForm.style.display = 'none';
+});
 
 addTask.addEventListener('click', (e) => {
   form.style.display = '';

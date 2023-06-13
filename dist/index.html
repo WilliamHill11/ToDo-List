@@ -21,8 +21,11 @@
         <h2>Projects</h2>
         <button class="createProject">+ Create new project</button>
         <form action="" id="projectForm" style="display: none">
-          <input type="text" name="projectName" id="projectName">
+          <input type="text" name="projectName" id="projectName" placeholder="Project Name">
           <label for="projectName"></label>
+
+          <input type="submit" value="Add" id="addProject" />
+          <input type="submit" value="Cancel" id="cancelProject" />
         </form>
       </nav>
       <div class="content">
@@ -40,12 +43,11 @@
 
               <select name="inbox" id="inbox">
                 <option value="inbox">Inbox</option>
-                <option value="test">test</option>
               </select>
 
               <div class="bottom">
                 <select name="priority" id="priority">
-                  <option value="none">Priority Level</option>
+                  <option value="None">Priority Level</option>
                   <option value="Low">Low</option>
                   <option value="High">High</option>
                 </select>

@@ -22,7 +22,6 @@ header {
   font-family: fantasy;
   font-size: 3rem;
   padding: 0.5em;
-  text-align: center;
 }
 
 main {
@@ -44,16 +43,24 @@ li {
 .createProject:hover,
 li:hover {
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
   background: darkgray;
 }
 
 .createProject {
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   padding: 1em;
   font-size: 1em;
   background: rgb(205, 200, 197);
   border: none;
+}
+
+.projects {
+  background-color: lightpink;
+  margin: 1em;
+  border-radius: 10px;
 }
 
 .content {
@@ -75,7 +82,7 @@ li:hover {
   box-shadow: 1px 1px 5px rgb(71, 70, 70);
 }
 
-form {
+#formID {
   display: flex;
   justify-content: center;
   padding-bottom: 1em;
@@ -96,7 +103,9 @@ select {
 }
 
 #formSubmit,
-#cancelForm {
+#cancelForm,
+#addProject,
+#cancelProject {
   margin: 0.5em;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
