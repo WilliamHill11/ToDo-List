@@ -75,13 +75,15 @@ function createToDoList(task) {
 function todaysFolder() {
   content.textContent = '';
   pageName.textContent = 'Today';
-  content.append(pageName);
+  content.append(pageName, form);
+  form.style.display = 'none';
 }
 
 function upcomingFolder() {
   content.textContent = '';
   pageName.textContent = 'Upcoming';
-  content.append(pageName);
+  content.append(pageName, form);
+  form.style.display = 'none';
 }
 
 let newProject = [];
@@ -122,9 +124,9 @@ function createProject() {
   projectList.textContent = projectName.value;
 
   const projectCategory = document.querySelector('#inbox');
-  if (projectCategory === null) return;
+  // if (projectCategory === null) return;
   projectCategory.add(new Option(projectName.value, projectName.value));
-  log(projectCategory);
+  // log(projectCategory);
 
   projectForm.style.display = '';
 }
