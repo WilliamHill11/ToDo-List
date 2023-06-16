@@ -15,6 +15,7 @@ const upcomingEvents = document.querySelector('.upcoming');
 const projectForm = document.querySelector('#projectForm');
 const createNewProject = document.querySelector('.createProject');
 const toDoListWrapper = document.querySelector('.toDoListWrapper');
+const toDoListProjects = document.querySelector('.projectList');
 const addProject = document.querySelector('#addProject');
 const cancelProject = document.querySelector('#cancelProject');
 const pageName = document.querySelector('.pageName');
@@ -33,13 +34,60 @@ function inboxFolder() {
 
 function render() {
   toDoListWrapper.textContent = '';
+  // toDoListProjects.textContent = '';
   for (let i = 0; i < toDoList.length; i++) {
     createToDoList(toDoList[i]);
+    // createProjectList(toDoList[i]);
   }
 }
 
+// function createProjectList(task) {
+
+//   for (let i = 0; i < newProject.length; i++) {
+//     log(projectInbox, 'hi');
+//     if (projectInbox === newProject[i].projectName) {
+//       const projectItem = document.createElement('div');
+
+//       projectItem.classList.add('toDoList');
+//       toDoListProjects.appendChild(projectItem);
+
+//       const taskName = document.createElement('p');
+//       taskName.classList.add('taskFinish');
+//       taskName.textContent = task.title;
+
+//       const date = document.createElement('p');
+//       if (task.dueDate !== '') {
+//         date.textContent = task.dueDate;
+//       } else {
+//         date.textContent = 'No Due Date';
+//       }
+
+//       const project = document.createElement('p');
+//       project.innerHTML = `Project: <b>${task.inbox}<b>`;
+
+//       const priority = document.createElement('p');
+//       if (task.priority === 'High') {
+//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+//         projectItem.style.backgroundColor = 'rgb(240, 67, 67)';
+//       } else if (task.priority === 'Low') {
+//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+//         projectItem.style.backgroundColor = 'orange';
+//       } else {
+//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+//       }
+
+//       projectItem.appendChild(taskName, date, project, priority);
+// renderProjectFolder();
+// trying to pass in items that are created with the name from project
+//   }
+// }
+// }
+
+//Maybe have the same render function for project list but only append appropriate items
+
 function createToDoList(task) {
   const toDoList = document.querySelector('.toDoListWrapper');
+
   const newItem = document.createElement('div');
   newItem.classList.add('toDoList');
   toDoList.appendChild(newItem);
@@ -70,7 +118,67 @@ function createToDoList(task) {
   }
 
   newItem.append(taskName, date, project, priority);
+
+  for (let i = 0; i < newProject.length; i++) {
+    const projectInbox = document.querySelector('#inbox').value;
+    if (projectInbox === newProject[i].projectName) {
+      let projectToDoList = [];
+      let otherList = new Inbox(
+        title.value,
+        dueDate.value,
+        inbox.value,
+        priority.value
+      );
+      projectToDoList.push(otherList);
+      const projectItem = document.createElement('div');
+      projectItem.classList.add('toDoList');
+
+      const taskProject = document.createElement('p');
+      taskProject.classList.add('taskFinish');
+      taskProject.textContent = task.title;
+
+      const dateProject = document.createElement('p');
+      if (task.dueDate !== '') {
+        dateProject.textContent = task.dueDate;
+      } else {
+        dateProject.textContent = 'No Due Date';
+      }
+
+      const projectProject = document.createElement('p');
+      projectProject.innerHTML = `Project: <b>${task.inbox}<b>`;
+
+      const priorityProject = document.createElement('p');
+      if (task.priority === 'High') {
+        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+        projectItem.style.backgroundColor = 'rgb(240, 67, 67)';
+      } else if (task.priority === 'Low') {
+        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+        projectItem.style.backgroundColor = 'orange';
+      } else {
+        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+      }
+
+      projectItem.append(
+        taskProject,
+        dateProject,
+        projectProject,
+        priorityProject
+      );
+      toDoListProjects.append(projectItem);
+    }
+  }
+  //     // renderProjectFolder();
+  //     log('hi');
+  //     // trying to pass in items that are created with the name from project
+  //   }
+  // }
 }
+
+// function renderProjectFolder(list) {
+//   // content.textContent = '';
+//   // content.textContent = list;
+//   log('hi');
+// }
 
 function todaysFolder() {
   content.textContent = '';
@@ -97,19 +205,16 @@ let newProject = [];
 //   log('hi dear!');
 // }
 
+//Click event for Project folders
 document.body.addEventListener('click', (e) => {
-  const target = e.target.closest('.projects');
-  log(pageName);
-  if (target) {
+  const targetProjects = e.target.closest('.projects');
+  // log(pageName);
+  if (targetProjects) {
     // content.textContent = '';
-    log(target.textContent);
-    if (pageName.textContent !== '') {
-      pageName.textContent = target.textContent;
-    } else {
-      pageName.textContent = '';
-    }
-  } else {
-    log('nope');
+    // log(targetProjects.textContent);
+    content.textContent = '';
+    pageName.textContent = targetProjects.textContent;
+    content.append(pageName, toDoListProjects);
   }
 });
 
