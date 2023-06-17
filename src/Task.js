@@ -10,13 +10,9 @@ class Inbox {
 export let toDoList = [];
 
 export function createInbox() {
-  let thisList = new Inbox(
-    title.value,
-    dueDate.value,
-    inbox.value,
-    priority.value
+  toDoList.push(
+    new Inbox(title.value, dueDate.value, inbox.value, priority.value)
   );
-  toDoList.push(thisList);
   console.log(toDoList);
 }
 

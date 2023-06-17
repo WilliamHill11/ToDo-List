@@ -121,8 +121,9 @@ function createToDoList(task) {
 
   for (let i = 0; i < newProject.length; i++) {
     const projectInbox = document.querySelector('#inbox').value;
+    let projectToDoList = [];
+
     if (projectInbox === newProject[i].projectName) {
-      let projectToDoList = [];
       let otherList = new Inbox(
         title.value,
         dueDate.value,
@@ -130,6 +131,7 @@ function createToDoList(task) {
         priority.value
       );
       projectToDoList.push(otherList);
+
       const projectItem = document.createElement('div');
       projectItem.classList.add('toDoList');
 
