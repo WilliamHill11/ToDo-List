@@ -4,4 +4,6 @@ class Project {
   }
 }
 
+// Maybe create a extender?
+
 export default Project;

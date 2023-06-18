@@ -41,48 +41,6 @@ function render() {
   }
 }
 
-// function createProjectList(task) {
-
-//   for (let i = 0; i < newProject.length; i++) {
-//     log(projectInbox, 'hi');
-//     if (projectInbox === newProject[i].projectName) {
-//       const projectItem = document.createElement('div');
-
-//       projectItem.classList.add('toDoList');
-//       toDoListProjects.appendChild(projectItem);
-
-//       const taskName = document.createElement('p');
-//       taskName.classList.add('taskFinish');
-//       taskName.textContent = task.title;
-
-//       const date = document.createElement('p');
-//       if (task.dueDate !== '') {
-//         date.textContent = task.dueDate;
-//       } else {
-//         date.textContent = 'No Due Date';
-//       }
-
-//       const project = document.createElement('p');
-//       project.innerHTML = `Project: <b>${task.inbox}<b>`;
-
-//       const priority = document.createElement('p');
-//       if (task.priority === 'High') {
-//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
-//         projectItem.style.backgroundColor = 'rgb(240, 67, 67)';
-//       } else if (task.priority === 'Low') {
-//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
-//         projectItem.style.backgroundColor = 'orange';
-//       } else {
-//         priority.innerHTML = `Priority: <b>${task.priority}<b>`;
-//       }
-
-//       projectItem.appendChild(taskName, date, project, priority);
-// renderProjectFolder();
-// trying to pass in items that are created with the name from project
-//   }
-// }
-// }
-
 //Maybe have the same render function for project list but only append appropriate items
 
 function createToDoList(task) {
@@ -121,9 +79,13 @@ function createToDoList(task) {
 
   for (let i = 0; i < newProject.length; i++) {
     const projectInbox = document.querySelector('#inbox').value;
+    log(projectInbox, 'yes');
+    log(newProject.length, 'length');
     let projectToDoList = [];
 
+    //Project constructor only has projectName ??
     if (projectInbox === newProject[i].projectName) {
+      toDoListProjects.textContent = '';
       let otherList = new Inbox(
         title.value,
         dueDate.value,
@@ -169,18 +131,7 @@ function createToDoList(task) {
       toDoListProjects.append(projectItem);
     }
   }
-  //     // renderProjectFolder();
-  //     log('hi');
-  //     // trying to pass in items that are created with the name from project
-  //   }
-  // }
 }
-
-// function renderProjectFolder(list) {
-//   // content.textContent = '';
-//   // content.textContent = list;
-//   log('hi');
-// }
 
 function todaysFolder() {
   content.textContent = '';
@@ -197,15 +148,6 @@ function upcomingFolder() {
 }
 
 let newProject = [];
-
-//Trying to create a event when clicking on project list
-// const getProjectList = document.querySelector('li.projects');
-
-// getProjectList.addEventListener('click', renderProject);
-
-// function renderProject() {
-//   log('hi dear!');
-// }
 
 //Click event for Project folders
 document.body.addEventListener('click', (e) => {
