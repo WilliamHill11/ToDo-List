@@ -34,7 +34,7 @@ function inboxFolder() {
 
 function render() {
   toDoListWrapper.textContent = '';
-  // toDoListProjects.textContent = '';
+
   for (let i = 0; i < toDoList.length; i++) {
     createToDoList(toDoList[i]);
     // createProjectList(toDoList[i]);
@@ -77,59 +77,59 @@ function createToDoList(task) {
 
   newItem.append(taskName, date, project, priority);
 
-  for (let i = 0; i < newProject.length; i++) {
-    const projectInbox = document.querySelector('#inbox').value;
-    log(projectInbox, 'yes');
-    log(newProject.length, 'length');
-    let projectToDoList = [];
+  const projectInbox = document.querySelector('#inbox').value;
+  log(projectInbox, 'yes');
+  log(newProject.length, 'length');
+  let projectToDoList = [];
 
-    //Project constructor only has projectName ??
-    if (projectInbox === newProject[i].projectName) {
-      toDoListProjects.textContent = '';
-      let otherList = new Inbox(
-        title.value,
-        dueDate.value,
-        inbox.value,
-        priority.value
-      );
-      projectToDoList.push(otherList);
+  //Project constructor only has projectName ??
+  if (projectInbox !== 'inbox') {
+    let otherList = new Inbox(
+      title.value,
+      dueDate.value,
+      inbox.value,
+      priority.value
+    );
+    projectToDoList.push(otherList);
 
-      const projectItem = document.createElement('div');
-      projectItem.classList.add('toDoList');
+    // toDoListProjects.textContent = '';
 
-      const taskProject = document.createElement('p');
-      taskProject.classList.add('taskFinish');
-      taskProject.textContent = task.title;
+    const projectItem = document.createElement('div');
+    projectItem.classList.add('toDoList');
 
-      const dateProject = document.createElement('p');
-      if (task.dueDate !== '') {
-        dateProject.textContent = task.dueDate;
-      } else {
-        dateProject.textContent = 'No Due Date';
-      }
+    const taskProject = document.createElement('p');
+    taskProject.classList.add('taskFinish');
+    taskProject.textContent = task.title;
 
-      const projectProject = document.createElement('p');
-      projectProject.innerHTML = `Project: <b>${task.inbox}<b>`;
-
-      const priorityProject = document.createElement('p');
-      if (task.priority === 'High') {
-        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
-        projectItem.style.backgroundColor = 'rgb(240, 67, 67)';
-      } else if (task.priority === 'Low') {
-        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
-        projectItem.style.backgroundColor = 'orange';
-      } else {
-        priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
-      }
-
-      projectItem.append(
-        taskProject,
-        dateProject,
-        projectProject,
-        priorityProject
-      );
-      toDoListProjects.append(projectItem);
+    const dateProject = document.createElement('p');
+    if (task.dueDate !== '') {
+      dateProject.textContent = task.dueDate;
+    } else {
+      dateProject.textContent = 'No Due Date';
     }
+
+    const projectProject = document.createElement('p');
+    projectProject.innerHTML = `Project: <b>${task.inbox}<b>`;
+
+    const priorityProject = document.createElement('p');
+    if (task.priority === 'High') {
+      priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+      projectItem.style.backgroundColor = 'rgb(240, 67, 67)';
+    } else if (task.priority === 'Low') {
+      priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+      projectItem.style.backgroundColor = 'orange';
+    } else {
+      priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
+    }
+
+    log(toDoListProjects, 'y');
+    projectItem.append(
+      taskProject,
+      dateProject,
+      projectProject,
+      priorityProject
+    );
+    toDoListProjects.append(projectItem);
   }
 }
 
@@ -154,11 +154,11 @@ document.body.addEventListener('click', (e) => {
   const targetProjects = e.target.closest('.projects');
   // log(pageName);
   if (targetProjects) {
-    // content.textContent = '';
-    // log(targetProjects.textContent);
     content.textContent = '';
     pageName.textContent = targetProjects.textContent;
     content.append(pageName, toDoListProjects);
+    // might have to dynamically add in a div (todolistproject) since
+    // each one needs to be different
   }
 });
 
