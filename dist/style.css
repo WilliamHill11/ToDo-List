@@ -156,3 +156,7 @@ select {
   height: 50px;
   width: 50px;
 } */
+
+.hideProject {
+  display: none;
+}

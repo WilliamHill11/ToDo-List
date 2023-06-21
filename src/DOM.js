@@ -121,6 +121,16 @@ function createToDoList(task) {
     } else {
       priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
     }
+    log(projectProject.textContent, 'nah');
+    const yo = document.querySelector('.toDoList b').textContent;
+
+    if (projectProject.textContent.includes('inbox')) {
+      log(yo, 'ok');
+      log(priorityProject, 'yes');
+      // yo.classList.add('hideProject');
+
+      // yo.style.display = '';
+    }
 
     log(toDoListProjects, 'y');
     projectItem.append(
