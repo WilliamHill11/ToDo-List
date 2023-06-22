@@ -149,6 +149,14 @@ select {
   border: thin solid rgb(229, 227, 227);
 }
 
+.toDoList2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75em;
+  padding: 1.5em;
+  border: thin solid rgb(229, 227, 227);
+}
+
 /* .taskFinish::before {
   content: '';
   background-color: aqua;

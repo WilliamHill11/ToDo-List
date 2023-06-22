@@ -78,8 +78,6 @@ function createToDoList(task) {
   newItem.append(taskName, date, project, priority);
 
   const projectInbox = document.querySelector('#inbox').value;
-  log(projectInbox, 'yes');
-  log(newProject.length, 'length');
   let projectToDoList = [];
 
   //Project constructor only has projectName ??
@@ -125,8 +123,19 @@ function createToDoList(task) {
     const yo = document.querySelector('.toDoList b').textContent;
 
     if (projectProject.textContent.includes('inbox')) {
+      log(projectInbox, 'no');
       log(yo, 'ok');
-      log(priorityProject, 'yes');
+      const list = document.querySelector('.toDoList b');
+      log(list, 'd');
+      const whatever = document.querySelector('.toDoList');
+      log(whatever, 'lol');
+      const yo2 = document.querySelector('.toDoList b');
+      log(yo2, 'yessir');
+      log(yo2.parentElement.parentElement, 'element');
+      log(toDoListProjects.childNodes.forEach((child)) => {
+        log(child)
+      }), 'dsad))';
+      // yo2.parentElement.parentElement.style.display = 'none';
       // yo.classList.add('hideProject');
 
       // yo.style.display = '';
