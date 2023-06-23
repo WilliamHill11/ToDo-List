@@ -149,7 +149,7 @@ select {
   border: thin solid rgb(229, 227, 227);
 }
 
-.toDoList2 {
+.toDoListProject {
   display: flex;
   justify-content: space-between;
   margin: 0.75em;
@@ -157,6 +157,9 @@ select {
   border: thin solid rgb(229, 227, 227);
 }
 
+span {
+  font-weight: bold;
+}
 /* .taskFinish::before {
   content: '';
   background-color: aqua;
@@ -164,7 +167,3 @@ select {
   height: 50px;
   width: 50px;
 } */
-
-.hideProject {
-  display: none;
-}

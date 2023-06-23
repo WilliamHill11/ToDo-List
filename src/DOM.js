@@ -63,6 +63,7 @@ function createToDoList(task) {
 
   const project = document.createElement('p');
   project.innerHTML = `Project: <b>${task.inbox}<b>`;
+  project.classList.add('cheese');
 
   const priority = document.createElement('p');
   if (task.priority === 'High') {
@@ -72,10 +73,17 @@ function createToDoList(task) {
     priority.innerHTML = `Priority: <b>${task.priority}<b>`;
     newItem.style.backgroundColor = 'orange';
   } else {
-    priority.innerHTML = `Priority: <b>${task.priority}<b>`;
+    priority.innerHTML = `Priority: <span>${task.priority}<span>`;
   }
 
   newItem.append(taskName, date, project, priority);
+
+  const elementName = document.querySelectorAll('p.cheese b');
+  elementName.forEach((node) => {
+    log(node.textContent.includes('inbox'), 'yes');
+  });
+  log(elementName, 'paragraph');
+  log(newItem, 'thisItem');
 
   const projectInbox = document.querySelector('#inbox').value;
   let projectToDoList = [];
@@ -93,7 +101,7 @@ function createToDoList(task) {
     // toDoListProjects.textContent = '';
 
     const projectItem = document.createElement('div');
-    projectItem.classList.add('toDoList');
+    projectItem.classList.add('toDoListProject');
 
     const taskProject = document.createElement('p');
     taskProject.classList.add('taskFinish');
@@ -120,26 +128,25 @@ function createToDoList(task) {
       priorityProject.innerHTML = `Priority: <b>${task.priority}<b>`;
     }
     log(projectProject.textContent, 'nah');
-    const yo = document.querySelector('.toDoList b').textContent;
+    const yo = document.querySelector('.toDoListProject');
 
-    if (projectProject.textContent.includes('inbox')) {
-      log(projectInbox, 'no');
-      log(yo, 'ok');
-      const list = document.querySelector('.toDoList b');
-      log(list, 'd');
-      const whatever = document.querySelector('.toDoList');
-      log(whatever, 'lol');
-      const yo2 = document.querySelector('.toDoList b');
-      log(yo2, 'yessir');
-      log(yo2.parentElement.parentElement, 'element');
-      log(toDoListProjects.childNodes.forEach((child)) => {
-        log(child)
-      }), 'dsad))';
-      // yo2.parentElement.parentElement.style.display = 'none';
-      // yo.classList.add('hideProject');
+    const childElements = toDoListProjects.children;
+    const newArray = Array.from(childElements);
+    newArray.forEach((oyster) => {
+      log(oyster, 'list');
 
-      // yo.style.display = '';
-    }
+      // if (oyster.projectProject.includes('inbox')) {
+      //   log('hi');
+      //   oyster.style.display = 'none';
+      // }
+    });
+
+    // log(yo2.parentElement.parentElement, 'element');
+    // log(toDoListProjects, 'dsad');
+    // yo2.parentElement.parentElement.style.display = 'none';
+    // yo.classList.add('hideProject');
+
+    // yo.style.display = '';
 
     log(toDoListProjects, 'y');
     projectItem.append(
@@ -171,15 +178,23 @@ let newProject = [];
 //Click event for Project folders
 document.body.addEventListener('click', (e) => {
   const targetProjects = e.target.closest('.projects');
-  // log(pageName);
   if (targetProjects) {
     content.textContent = '';
-    pageName.textContent = targetProjects.textContent;
-    content.append(pageName, toDoListProjects);
+    renderProject(targetProjects);
     // might have to dynamically add in a div (todolistproject) since
     // each one needs to be different
   }
 });
+
+function renderProject(project) {
+  pageName.textContent = project.textContent;
+  content.append(pageName, form, toDoListProjects);
+  const newDiv = document.createElement('div');
+  // const projectCategory = document.querySelector('#inbox');
+  // newDiv.textContent = projectCategory;
+
+  // toDoListProjects.appendChild(newDiv);
+}
 
 function createProject() {
   log(newProject);
@@ -190,12 +205,10 @@ function createProject() {
   navBar.append(projectList);
   projectList.classList.add('projects');
   projectList.textContent = projectName.value;
-
   const projectCategory = document.querySelector('#inbox');
   // if (projectCategory === null) return;
   projectCategory.add(new Option(projectName.value, projectName.value));
   // log(projectCategory);
-
   projectForm.style.display = '';
 }
 
