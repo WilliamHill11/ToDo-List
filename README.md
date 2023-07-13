@@ -8,3 +8,6 @@
 -  Date fns
 -  Using local storage
 -  Eslint
+
+// What I can improve on 
+-  Using Single Responsibility Principle
