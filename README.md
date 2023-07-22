@@ -1,7 +1,7 @@
 # ToDo-List
 
 // What I learned 
--  Using the Single Responsibility Principle
+-  Using the Single Responsibility Principles
 -  Creating new form options
 -  Using dates
 -  Using External Library
